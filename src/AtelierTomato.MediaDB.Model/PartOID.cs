@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AtelierTomato.MediaDB.Model.ID
+namespace AtelierTomato.MediaDB.Model
 {
 	public class PartOID
 	{
