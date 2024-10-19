@@ -3,8 +3,8 @@
 	public class Part
 	{
 		public ulong SeriesID { get; set; }
-		public PartOID PartID { get; set; }
-		public Part(ulong seriesID, PartOID partID)
+		public PartID PartID { get; set; }
+		public Part(ulong seriesID, PartID partID)
 		{
 			SeriesID = seriesID;
 			PartID = partID;
