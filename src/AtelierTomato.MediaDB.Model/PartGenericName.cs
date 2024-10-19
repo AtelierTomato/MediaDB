@@ -2,20 +2,21 @@
 
 namespace AtelierTomato.MediaDB.Model
 {
-	public class PartName
+	public class PartGenericName
 	{
 		public ulong SeriesID { get; set; }
-		public PartID PartID { get; set; }
+		public PartID? ParentPartID { get; set; }
 		public CultureInfo Language { get; set; }
 		public ScriptType Script { get; set; }
 		public string Name { get; set; }
-		public PartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script, string name)
+
+		public PartGenericName(ulong seriesID, PartID? parentPartID, CultureInfo language, ScriptType script, string partName)
 		{
 			SeriesID = seriesID;
-			PartID = partID;
+			ParentPartID = parentPartID;
 			Language = language;
 			Script = script;
-			Name = name;
+			Name = partName;
 		}
 	}
 }

@@ -4,9 +4,9 @@ namespace AtelierTomato.MediaDB.Model
 {
 	public class PartID
 	{
-		public int Number { get; set; }
+		public decimal Number { get; set; }
 		public PartID? ParentPartID { get; set; } = null;
-		public PartID(int number, PartID? parentPartID = null)
+		public PartID(decimal number, PartID? parentPartID = null)
 		{
 			Number = number;
 			ParentPartID = parentPartID;
@@ -16,19 +16,19 @@ namespace AtelierTomato.MediaDB.Model
 			StringBuilder sb = new();
 			if (ParentPartID is not null)
 			{
-				sb.Append(ParentPartID.ToString() + '.');
+				sb.Append(ParentPartID.ToString() + ':');
 			}
 			sb.Append(Number);
 			return sb.ToString();
 		}
 		public static PartID Parse(string input)
 		{
-			var numbers = input.Split('.').Select(n => int.TryParse(n, out int result) ? result :
-				throw new ArgumentException($"{nameof(PartID)} failed to parse as '{n}' is not a valid integer value.", nameof(input))
+			var numbers = input.Split(':').Select(n => decimal.TryParse(n, out decimal result) ? result :
+				throw new ArgumentException($"{nameof(PartID)} failed to parse as '{n}' is not a valid decimal value.", nameof(input))
 			);
 			return Parse(numbers);
 		}
-		public static PartID Parse(IEnumerable<int> input)
+		public static PartID Parse(IEnumerable<decimal> input)
 		{
 			if (!input.Any())
 				throw new ArgumentException($"{nameof(PartID)} failed to parse as {nameof(input)} is empty.", nameof(input));
