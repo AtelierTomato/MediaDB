@@ -39,5 +39,14 @@ namespace AtelierTomato.MediaDB.Model
 			}
 			return partOID!;
 		}
+		public int Depth()
+		{
+			int depth = 1;
+			if (ParentPartOID is not null)
+			{
+				depth += ParentPartOID.Depth();
+			}
+			return depth;
+		}
 	}
 }

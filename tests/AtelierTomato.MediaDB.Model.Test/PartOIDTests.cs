@@ -12,7 +12,7 @@ namespace AtelierTomato.MediaDB.Model.Test
 			partOID.Should().BeEquivalentTo(new PartOID(3, new PartOID(2, new PartOID(1))));
 		}
 		[Fact]
-		public void SeriesPartOIDToStringTest()
+		public void PartOIDToStringTest()
 		{
 			var partOID = new PartOID(3, new PartOID(2, new PartOID(1)));
 			var partOIDString = partOID.ToString();
@@ -29,6 +29,16 @@ namespace AtelierTomato.MediaDB.Model.Test
 		{
 			Action act = () => PartOID.Parse([]);
 			act.Should().Throw<ArgumentException>().WithMessage($"{nameof(PartOID)} failed to parse as input is empty. (Parameter 'input')");
+		}
+		[Theory]
+		[InlineData("1", 1)]
+		[InlineData("1.2", 2)]
+		[InlineData("1.2.3", 3)]
+		[InlineData("1.2.3.4", 4)]
+		public void DepthTests(string input, int output)
+		{
+			var partOID = PartOID.Parse(input);
+			partOID.Depth().Should().Be(output);
 		}
 	}
 }
