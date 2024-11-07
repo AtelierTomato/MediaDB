@@ -3,7 +3,7 @@
 namespace AtelierTomato.MediaDB.Model
 {
 	/// <summary>
-	/// Refers to the general name of a group of parts. Example: 'Series', 'Episode', et cetera.
+	/// The general name of a group of parts. Example: 'Series', 'Episode', et cetera.
 	/// </summary>
 	public class PartGroupName
 	{
