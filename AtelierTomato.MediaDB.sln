@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtelierTomato.MediaDB.Model", "src\AtelierTomato.MediaDB.Model\AtelierTomato.MediaDB.Model.csproj", "{87FECF39-D446-4200-AE53-AD9BC767E9D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtelierTomato.MediaDB.Model.Test", "tests\AtelierTomato.MediaDB.Model.Test\AtelierTomato.MediaDB.Model.Test.csproj", "{2EB9EEE4-DA68-4DE7-AF27-7A3D4617110A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtelierTomato.MediaDB.Model.Test", "tests\AtelierTomato.MediaDB.Model.Test\AtelierTomato.MediaDB.Model.Test.csproj", "{2EB9EEE4-DA68-4DE7-AF27-7A3D4617110A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtelierTomato.MediaDB.Storage", "src\AtelierTomato.MediaDB.Storage\AtelierTomato.MediaDB.Storage.csproj", "{81DFD064-6B02-456A-9C16-3A102EE45254}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2EB9EEE4-DA68-4DE7-AF27-7A3D4617110A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB9EEE4-DA68-4DE7-AF27-7A3D4617110A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB9EEE4-DA68-4DE7-AF27-7A3D4617110A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DFD064-6B02-456A-9C16-3A102EE45254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DFD064-6B02-456A-9C16-3A102EE45254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DFD064-6B02-456A-9C16-3A102EE45254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DFD064-6B02-456A-9C16-3A102EE45254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
