@@ -8,6 +8,7 @@
 		Cinema,
 		Published,
 		Web,
+		Arcade,
 		Tabletop
 	}
 }
