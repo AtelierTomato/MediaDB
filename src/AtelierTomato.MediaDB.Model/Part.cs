@@ -6,12 +6,16 @@
 		public PartID PartID { get; set; }
 		public TimeSpan? LengthTime { get; set; }
 		public int? LengthWords { get; set; }
-		public Part(ulong seriesID, PartID partID, TimeSpan? lengthTime, int? lengthWords)
+		public DateTimeOffset? StartTime { get; set; }
+		public DateTimeOffset? EndTime { get; set; }
+		public Part(ulong seriesID, PartID partID, TimeSpan? lengthTime = null, int? lengthWords = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null)
 		{
 			SeriesID = seriesID;
 			PartID = partID;
 			LengthTime = lengthTime;
 			LengthWords = lengthWords;
+			StartTime = startTime;
+			EndTime = endTime;
 		}
 	}
 }
