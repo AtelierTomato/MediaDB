@@ -2,6 +2,7 @@
 {
 	public enum MediaType
 	{
+		Unknown,
 		Other,
 		Animation,
 		LiveAction,

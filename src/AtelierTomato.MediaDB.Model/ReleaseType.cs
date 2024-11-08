@@ -2,6 +2,7 @@
 {
 	public enum ReleaseType
 	{
+		Unknown,
 		Other,
 		Serialized,
 		Stage,
