@@ -11,5 +11,14 @@
 		public int? AverageLengthWords { get; set; }
 		public MediaType MediaType { get; set; }
 		public ReleaseType ReleaseType { get; set; }
+		public PartGroupInfo(ulong seriesID, PartID? parentPartID, TimeSpan? averageLengthTime, int? averageLengthWords, MediaType mediaType, ReleaseType releaseType)
+		{
+			SeriesID = seriesID;
+			ParentPartID = parentPartID;
+			AverageLengthTime = averageLengthTime;
+			AverageLengthWords = averageLengthWords;
+			MediaType = mediaType;
+			ReleaseType = releaseType;
+		}
 	}
 }

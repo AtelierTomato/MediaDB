@@ -13,13 +13,13 @@ namespace AtelierTomato.MediaDB.Model
 		public ScriptType Script { get; set; }
 		public string Name { get; set; }
 
-		public PartGroupName(ulong seriesID, PartID? parentPartID, CultureInfo language, ScriptType script, string partName)
+		public PartGroupName(ulong seriesID, PartID? parentPartID, CultureInfo language, ScriptType script, string name)
 		{
 			SeriesID = seriesID;
 			ParentPartID = parentPartID;
 			Language = language;
 			Script = script;
-			Name = partName;
+			Name = name;
 		}
 	}
 }
