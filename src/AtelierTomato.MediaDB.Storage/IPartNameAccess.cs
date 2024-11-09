@@ -7,13 +7,13 @@ namespace AtelierTomato.MediaDB.Storage
 	{
 		Task WritePartName(PartName partName);
 		Task WritePartNameRange(IEnumerable<PartName> partNameRange);
-		Task<PartName?> ReadPartName(ulong SeriesID, PartID PartID, CultureInfo Language, ScriptType Script);
-		Task<IEnumerable<PartName>> ReadPartNameRangeForSeriesWithLanguage(ulong SeriesID, CultureInfo Language, ScriptType Script);
-		Task<IEnumerable<PartName>> ReadPartNameRangeForPart(ulong SeriesID, PartID PartID);
-		Task<IEnumerable<PartName>> ReadPartNameRangeForSeries(ulong SeriesID);
+		Task<PartName?> ReadPartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script);
+		Task<IEnumerable<PartName>> ReadPartNameRangeForSeriesWithLanguage(ulong seriesID, CultureInfo language, ScriptType script);
+		Task<IEnumerable<PartName>> ReadPartNameRangeForPart(ulong seriesID, PartID partID);
+		Task<IEnumerable<PartName>> ReadPartNameRangeForSeries(ulong seriesID);
 		Task<IEnumerable<PartName>> ReadAllPartNames();
-		Task DeletePartName(ulong SeriesID, PartID PartID, CultureInfo Language, ScriptType Script);
-		Task DeletePartNameRangeForPart(ulong SeriesID, PartID PartID);
-		Task DeletePartNameRangeForSeries(ulong SeriesID);
+		Task DeletePartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script);
+		Task DeletePartNameRangeForPart(ulong seriesID, PartID partID);
+		Task DeletePartNameRangeForSeries(ulong seriesID);
 	}
 }

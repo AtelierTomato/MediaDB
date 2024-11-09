@@ -6,10 +6,10 @@ namespace AtelierTomato.MediaDB.Storage
 	{
 		Task WritePartGroupInfo(PartGroupInfo partGroupInfo);
 		Task WritePartGroupInfoRange(IEnumerable<PartGroupInfo> partGroupInfoRange);
-		Task<PartGroupInfo?> ReadPartGroupInfo(ulong SeriesID, PartID? ParentPartID);
-		Task<IEnumerable<PartGroupInfo>> ReadPartGroupInfoRangeForSeries(ulong SeriesID);
+		Task<PartGroupInfo?> ReadPartGroupInfo(ulong seriesID, PartID? parentPartID);
+		Task<IEnumerable<PartGroupInfo>> ReadPartGroupInfoRangeForSeries(ulong seriesID);
 		Task<IEnumerable<PartGroupInfo>> ReadAllPartGroupInfos();
-		Task DeletePartGroupInfo(ulong SeriesID, PartID? ParentPartID);
-		Task DeletePartGroupInfoRangeForSeries(ulong SeriesID);
+		Task DeletePartGroupInfo(ulong seriesID, PartID? parentPartID);
+		Task DeletePartGroupInfoRangeForSeries(ulong seriesID);
 	}
 }
