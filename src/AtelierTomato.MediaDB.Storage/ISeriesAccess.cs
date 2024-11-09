@@ -4,6 +4,8 @@ namespace AtelierTomato.MediaDB.Storage
 {
 	public interface ISeriesAccess
 	{
+		Task WriteNewSeries(Series series);
+		Task WriteNewSeriesRange(IEnumerable<Series> seriesRange);
 		Task WriteSeries(Series series);
 		Task WriteSeriesRange(IEnumerable<Series> seriesRange);
 		Task<Series?> ReadSeries(ulong ID);
