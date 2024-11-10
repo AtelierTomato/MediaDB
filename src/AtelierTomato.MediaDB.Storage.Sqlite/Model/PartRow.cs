@@ -8,15 +8,15 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 		public ulong SeriesID { get; set; }
 		public string PartID { get; set; }
 		public string? LengthTime { get; set; }
-		public int? LengthWords { get; set; }
+		public int? LengthPages { get; set; }
 		public string? StartTime { get; set; }
 		public string? EndTime { get; set; }
-		public PartRow(ulong seriesID, string partID, string? lengthTime, int? lengthWords, string? startTime, string? endTime)
+		public PartRow(ulong seriesID, string partID, string? lengthTime, int? lengthPages, string? startTime, string? endTime)
 		{
 			SeriesID = seriesID;
 			PartID = partID;
 			LengthTime = lengthTime;
-			LengthWords = lengthWords;
+			LengthPages = lengthPages;
 			StartTime = startTime;
 			EndTime = endTime;
 		}
@@ -25,7 +25,7 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 			SeriesID = part.SeriesID;
 			PartID = part.PartID.ToString();
 			LengthTime = part.LengthTime?.ToString("c");
-			LengthWords = part.LengthWords;
+			LengthPages = part.LengthPages;
 			StartTime = part.StartTime?.ToString("o");
 			EndTime = part.EndTime?.ToString("o");
 		}
@@ -48,7 +48,7 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 				DateTimeOffset.TryParseExact(EndTime, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result);
 				endTime = result;
 			}
-			return new Part(SeriesID, MediaDB.Model.PartID.Parse(PartID), lengthTime, LengthWords, startTime, endTime);
+			return new Part(SeriesID, MediaDB.Model.PartID.Parse(PartID), lengthTime, LengthPages, startTime, endTime);
 		}
 	}
 }
