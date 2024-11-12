@@ -2,13 +2,13 @@
 
 namespace AtelierTomato.MediaDB.Model
 {
-	public class SeriesInfo
+	public class SeriesName
 	{
 		public ulong ID { get; set; }
 		public CultureInfo Language { get; set; }
 		public ScriptType Script { get; set; }
 		public string Name { get; set; }
-		public SeriesInfo(ulong ID, CultureInfo language, ScriptType script, string name)
+		public SeriesName(ulong ID, CultureInfo language, ScriptType script, string name)
 		{
 			this.ID = ID;
 			Language = language;

@@ -4,10 +4,18 @@
 	{
 		public ulong SeriesID { get; set; }
 		public PartID PartID { get; set; }
-		public Part(ulong seriesID, PartID partID)
+		public TimeSpan? LengthTime { get; set; }
+		public int? LengthPages { get; set; }
+		public DateTimeOffset? StartTime { get; set; }
+		public DateTimeOffset? EndTime { get; set; }
+		public Part(ulong seriesID, PartID partID, TimeSpan? lengthTime = null, int? lengthPages = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null)
 		{
 			SeriesID = seriesID;
 			PartID = partID;
+			LengthTime = lengthTime;
+			LengthPages = lengthPages;
+			StartTime = startTime;
+			EndTime = endTime;
 		}
 	}
 }
