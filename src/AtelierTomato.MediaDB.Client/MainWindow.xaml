@@ -19,11 +19,30 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<Image Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+			<Image Grid.Row="1" Grid.Column="1" Margin="0,0,0,25">
 				<Image.Source>
 					<BitmapImage UriSource="/aira.png"/>
 				</Image.Source>
 			</Image>
+		</Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="5"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+				<MenuItem Header="File"/>
+			</Menu>
+			<ListBox Grid.Row="1" Grid.Column="0" MinWidth="100" ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection}"/>
+			<GridSplitter Grid.Column="1" Grid.Row="1"/>
+			<ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding SelectedSection.Content}"/>
+			<StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
