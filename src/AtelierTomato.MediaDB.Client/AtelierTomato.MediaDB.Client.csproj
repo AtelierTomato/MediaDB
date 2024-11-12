@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="aira.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="aira.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Composition" Version="9.0.0" />
   </ItemGroup>
 
