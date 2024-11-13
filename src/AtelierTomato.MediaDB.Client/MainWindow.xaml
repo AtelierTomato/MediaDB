@@ -36,11 +36,22 @@
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-			<Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-				<MenuItem Header="File"/>
-			</Menu>
-			<ListBox Grid.Row="1" Grid.Column="0" MinWidth="100" ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection}"/>
-			<GridSplitter Grid.Column="1" Grid.Row="1"/>
+			<ListBox
+				Grid.Row="1"
+				Grid.Column="0"
+				MinWidth="100"
+				ItemsSource="{Binding Sections}"
+				SelectedItem="{Binding SelectedSection}">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type local:Section}">
+						<StackPanel Orientation="Horizontal">
+							<ContentControl Content="{Binding Icon}"/>
+							<TextBlock Text="{Binding Name}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			<GridSplitter Grid.Column="1" Grid.Row="1" Width="5" ResizeDirection="Columns"/>
 			<ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding SelectedSection.Content}"/>
 			<StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
 		</Grid>
@@ -55,7 +66,7 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="1" Grid.Column="1" Text="World!"/>
+			<TextBlock Grid.Row="1" Grid.Column="1" Text="Hello World!"/>
 		</Grid>
 	</Grid>
 </Window>
