@@ -69,7 +69,7 @@ FROM {nameof(Part)} WHERE
 			return result?.ToPart();
 		}
 
-		public async Task<IEnumerable<Part>> ReadPartRangeBySeries(ulong seriesID) => (await ReadPartRangeBySeriesRange([seriesID]);
+		public async Task<IEnumerable<Part>> ReadPartRangeBySeries(ulong seriesID) => await ReadPartRangeBySeriesRange([seriesID]);
 		public async Task<IEnumerable<Part>> ReadPartRangeBySeriesRange(IEnumerable<ulong> seriesIDRange)
 		{
 			await using var connection = new SqliteConnection(options.ConnectionString);
