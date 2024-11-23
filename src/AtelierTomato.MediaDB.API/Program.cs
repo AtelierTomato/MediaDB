@@ -1,3 +1,4 @@
+using AtelierTomato.MediaDB.API.Converters;
 using AtelierTomato.MediaDB.Storage;
 using AtelierTomato.MediaDB.Storage.Sqlite;
 using System.Diagnostics;
@@ -10,6 +11,12 @@ if (Debugger.IsAttached)
 {
 	builder.Configuration.AddUserSecrets<Program>();
 }
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.Converters.Add(new CultureInfoConverter());
+	options.JsonSerializerOptions.Converters.Add(new RegionInfoConverter());
+});
 
 builder.Services.AddOptions<SqliteAccessOptions>().Bind(builder.Configuration.GetSection("SqliteAccess"));
 
