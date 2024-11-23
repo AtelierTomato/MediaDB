@@ -9,10 +9,10 @@ namespace AtelierTomato.MediaDB.Model
 	{
 		public ulong SeriesID { get; set; }
 		public PartID? ParentPartID { get; set; }
-		public CultureInfo Language { get; set; }
+		public CultureInfo Language { get; set; } = new(0);
 		public ScriptType Script { get; set; }
-		public string Name { get; set; }
-
+		public string Name { get; set; } = string.Empty;
+		public PartGroupName() { }
 		public PartGroupName(ulong seriesID, PartID? parentPartID, CultureInfo language, ScriptType script, string name)
 		{
 			SeriesID = seriesID;

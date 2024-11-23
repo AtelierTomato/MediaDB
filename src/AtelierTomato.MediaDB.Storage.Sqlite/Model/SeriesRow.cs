@@ -6,11 +6,12 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 	public class SeriesRow
 	{
 		public ulong ID { get; set; }
-		public string OriginCountries { get; set; }
+		public string OriginCountries { get; set; } = string.Empty;
 		public string? OriginLanguage { get; set; }
 		public string? OriginScript { get; set; }
 		public string? StartTime { get; set; }
 		public string? EndTime { get; set; }
+		public SeriesRow() { }
 		public SeriesRow(ulong ID, string originCountries, string? originLanguage, string? originScript, string? startTime, string? endTime)
 		{
 			this.ID = ID;
@@ -49,12 +50,12 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 			DateTimeOffset? startTime = null, endTime = null;
 			if (StartTime is not null)
 			{
-				DateTimeOffset.TryParseExact(StartTime, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result);
+				DateTimeOffset.TryParse(StartTime, out var result);
 				startTime = result;
 			}
 			if (EndTime is not null)
 			{
-				DateTimeOffset.TryParseExact(EndTime, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result);
+				DateTimeOffset.TryParse(EndTime, out var result);
 				endTime = result;
 			}
 			return new Series(ID, originCountries, originLanguage, originScript, startTime, endTime);
