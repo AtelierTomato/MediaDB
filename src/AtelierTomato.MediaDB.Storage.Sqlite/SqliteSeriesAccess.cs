@@ -38,7 +38,7 @@ DELETE FROM {nameof(Series)} WHERE
 
 			var result = await connection.QueryAsync<SeriesRow>($@"
 SELECT {nameof(Series.ID)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)}
-FOMR {nameof(Series)}
+FROM {nameof(Series)}
 			");
 
 			connection.Close();

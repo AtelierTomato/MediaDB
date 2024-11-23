@@ -6,10 +6,11 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 	public class PartGroupNameRow
 	{
 		public ulong SeriesID { get; set; }
-		public string ParentPartID { get; set; }
-		public string Language { get; set; }
-		public string Script { get; set; }
-		public string Name { get; set; }
+		public string ParentPartID { get; set; } = string.Empty;
+		public string Language { get; set; } = string.Empty;
+		public string Script { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
+		public PartGroupNameRow() { }
 		public PartGroupNameRow(ulong seriesID, string parentPartID, string language, string script, string name)
 		{
 			SeriesID = seriesID;

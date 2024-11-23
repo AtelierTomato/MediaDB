@@ -4,6 +4,7 @@
 	{
 		public ulong ID { get; set; }
 		public ulong ParentID { get; set; }
+		public SeriesParent() { }
 		public SeriesParent(ulong ID, ulong parentID)
 		{
 			if (ID == parentID)

@@ -10,6 +10,7 @@ namespace AtelierTomato.MediaDB.Model
 		public ScriptType? OriginScript { get; set; } = null;
 		public DateTimeOffset? StartTime { get; set; }
 		public DateTimeOffset? EndTime { get; set; }
+		public Series() { }
 		public Series(ulong ID, IReadOnlyList<RegionInfo>? originCountries = null, CultureInfo? originLanguage = null, ScriptType? originScript = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null)
 		{
 			this.ID = ID;
