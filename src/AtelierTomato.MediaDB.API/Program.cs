@@ -21,14 +21,49 @@ builder.Services.AddSingleton<IPartAccess, SqlitePartAccess>()
 				.AddSingleton<ISeriesNameAccess, SqliteSeriesNameAccess>()
 				.AddSingleton<ISeriesParentAccess, SqliteSeriesParentAccess>();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowGetFromAnyOrigin", policy =>
+	{
+		policy.AllowAnyOrigin()
+			  .WithMethods("GET")
+			  .AllowAnyHeader();
+	});
+
+	options.AddPolicy("RestrictLocalAccess", policy =>
+	{
+		policy.WithOrigins("https://localhost", "http://localhost")
+			  .WithMethods("PUT", "POST", "DELETE")
+			  .AllowAnyHeader();
+	});
+});
+
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
 	app.UseDeveloperExceptionPage();
+} else
+{
+	app.UseExceptionHandler("/error");
 }
 
+app.MapHealthChecks("/health");
+
 app.UseHttpsRedirection();
+
+app.UseWhen(
+	context => context.Request.Method == HttpMethods.Get,
+	appBuilder => appBuilder.UseCors("AllowGetFromAnyOrigin")
+);
+
+app.UseWhen(
+	context => context.Request.Method != HttpMethods.Get,
+	appBuilder => appBuilder.UseCors("RestrictLocalAccess")
+);
+
 app.UseAuthorization();
 
 app.MapControllers();
