@@ -116,12 +116,12 @@ WHERE {nameof(PartGroupInfo.SeriesID)} IS @seriesID
 			{
 				await connection.ExecuteAsync($@"
 INSERT INTO {nameof(PartGroupInfo)} ( {nameof(PartGroupInfo.SeriesID)}, {nameof(PartGroupInfo.ParentPartID)}, {nameof(PartGroupInfo.AverageLengthTime)}, {nameof(PartGroupInfo.AverageLengthPages)}, {nameof(PartGroupInfo.MediaType)}, {nameof(PartGroupInfo.ReleaseType)} )
-VALUIES ( @seriesID, @parentPartID, @averageLengthTime, @averageLengthPages, @mediaType, @releaseType )
+VALUES ( @seriesID, @parentPartID, @averageLengthTime, @averageLengthPages, @mediaType, @releaseType )
 ON CONFLICT ({nameof(PartGroupInfo.SeriesID)}, {nameof(PartGroupInfo.ParentPartID)}) DO UPDATE SET
 {nameof(PartGroupInfo.AverageLengthTime)} = excluded.{nameof(PartGroupInfo.AverageLengthTime)},
 {nameof(PartGroupInfo.AverageLengthPages)} = excluded.{nameof(PartGroupInfo.AverageLengthPages)},
 {nameof(PartGroupInfo.MediaType)} = excluded.{nameof(PartGroupInfo.MediaType)},
-{nameof(PartGroupInfo.ReleaseType)} = excluded.{nameof(PartGroupInfo.ReleaseType)},
+{nameof(PartGroupInfo.ReleaseType)} = excluded.{nameof(PartGroupInfo.ReleaseType)}
 ",
 				new
 				{

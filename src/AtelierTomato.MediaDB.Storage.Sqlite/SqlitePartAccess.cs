@@ -28,7 +28,7 @@ DELETE FROM {nameof(Part)} WHERE
 			new
 			{
 				seriesID,
-				partIDRange,
+				partIDRange = partIDRange.Select(p => p.ToString()),
 			});
 
 			connection.Close();
@@ -62,7 +62,7 @@ FROM {nameof(Part)} WHERE
 			new
 			{
 				seriesID,
-				partID,
+				partID = partID.ToString(),
 			});
 
 			connection.Close();
