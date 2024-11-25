@@ -1,4 +1,5 @@
 using AtelierTomato.MediaDB.API.Converters;
+using AtelierTomato.MediaDB.API.ModelBinders;
 using AtelierTomato.MediaDB.Storage;
 using AtelierTomato.MediaDB.Storage.Sqlite;
 using System.Diagnostics;
@@ -12,8 +13,14 @@ if (Debugger.IsAttached)
 	builder.Configuration.AddUserSecrets<Program>();
 }
 
-builder.Services.AddControllers().AddJsonOptions(options =>
+builder.Services.AddControllers(options =>
 {
+	options.ModelBinderProviders.Insert(0, new PartIDModelBinderProvider());
+	options.ModelBinderProviders.Insert(1, new CultureInfoModelBinderProvider());
+	options.ModelBinderProviders.Insert(2, new RegionInfoModelBinderProvider());
+}).AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.Converters.Add(new PartIDConverter());
 	options.JsonSerializerOptions.Converters.Add(new CultureInfoConverter());
 	options.JsonSerializerOptions.Converters.Add(new RegionInfoConverter());
 });

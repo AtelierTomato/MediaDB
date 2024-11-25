@@ -26,7 +26,7 @@ namespace AtelierTomato.MediaDB.API.Controllers
 		}
 
 		[HttpPost("range")]
-		public async Task<IActionResult> WriteSeriesRange([FromBody] IEnumerable<SeriesName> seriesNameRange)
+		public async Task<IActionResult> WriteSeriesNameRange([FromBody] IEnumerable<SeriesName> seriesNameRange)
 		{
 			if (seriesNameRange is null || !seriesNameRange.Any())
 				return BadRequest("SeriesName range cannot be null.");
