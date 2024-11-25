@@ -6,6 +6,7 @@ namespace AtelierTomato.MediaDB.Model
 	{
 		public decimal Number { get; set; }
 		public PartID? ParentPartID { get; set; } = null;
+		public PartID() { }
 		public PartID(decimal number, PartID? parentPartID = null)
 		{
 			Number = number;

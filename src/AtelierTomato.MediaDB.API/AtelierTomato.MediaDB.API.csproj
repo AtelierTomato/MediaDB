@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1e8d4f28-7975-4b5c-bb20-36b74d0482f7</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AtelierTomato.MediaDB.Storage.Sqlite\AtelierTomato.MediaDB.Storage.Sqlite.csproj" />
+    <ProjectReference Include="..\AtelierTomato.MediaDB.Storage\AtelierTomato.MediaDB.Storage.csproj" />
+  </ItemGroup>
+
+</Project>

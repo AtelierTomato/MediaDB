@@ -80,7 +80,7 @@ WHERE {nameof(PartName.SeriesID)} IS @seriesID
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)}
 			");
 
@@ -94,7 +94,7 @@ FROM {nameof(PartName)}
 			connection.Open();
 
 			var result = await connection.QuerySingleOrDefaultAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.PartID)} IS @partID AND
@@ -119,7 +119,7 @@ FROM {nameof(PartName)} WHERE
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.PartID)} IS @partID
@@ -140,7 +140,7 @@ FROM {nameof(PartName)} WHERE
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)}
 WHERE {nameof(PartName.SeriesID)} IS @seriesID
 ",
@@ -159,7 +159,7 @@ WHERE {nameof(PartName.SeriesID)} IS @seriesID
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.Language)} Is @language AND

@@ -80,8 +80,8 @@ WHERE {nameof(Series.ID)} IN @ids
 			{
 				var id = await connection.ExecuteScalarAsync<ulong>($@"
 INSERT INTO {nameof(Series)} ( {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)} )
-VALUES ( @originCountries, @originLanguage, @originScript, @startTime, @endTime )
-SELECT last_insert_rowid()
+VALUES ( @originCountries, @originLanguage, @originScript, @startTime, @endTime );
+SELECT last_insert_rowid();
 ",
 				new
 				{
