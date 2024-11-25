@@ -37,7 +37,7 @@ DELETE FROM {nameof(Series)} WHERE
 			connection.Open();
 
 			var result = await connection.QueryAsync<SeriesRow>($@"
-SELECT {nameof(Series.ID)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)}
+SELECT {nameof(Series.ID)}, {nameof(Series.MediaType)}, {nameof(Series.ReleaseType)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)}
 FROM {nameof(Series)}
 			");
 
@@ -52,7 +52,7 @@ FROM {nameof(Series)}
 			connection.Open();
 
 			var result = await connection.QueryAsync<SeriesRow>($@"
-SELECT {nameof(Series.ID)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)}
+SELECT {nameof(Series.ID)}, {nameof(Series.MediaType)}, {nameof(Series.ReleaseType)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)}
 FROM {nameof(Series)}
 WHERE {nameof(Series.ID)} IN @ids
 ",
@@ -79,12 +79,14 @@ WHERE {nameof(Series.ID)} IN @ids
 			foreach (SeriesRow seriesRow in seriesRows)
 			{
 				var id = await connection.ExecuteScalarAsync<ulong>($@"
-INSERT INTO {nameof(Series)} ( {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)} )
-VALUES ( @originCountries, @originLanguage, @originScript, @startTime, @endTime );
+INSERT INTO {nameof(Series)} ( {nameof(Series.MediaType)}, {nameof(Series.ReleaseType)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)} )
+VALUES ( @mediaType, @releaseType, @originCountries, @originLanguage, @originScript, @startTime, @endTime );
 SELECT last_insert_rowid();
 ",
 				new
 				{
+					mediaType = seriesRow.MediaType,
+					releaseType = seriesRow.ReleaseType,
 					originCountries = seriesRow.OriginCountries,
 					originLanguage = seriesRow.OriginLanguage,
 					originScript = seriesRow.OriginScript,
@@ -110,9 +112,11 @@ SELECT last_insert_rowid();
 			foreach (SeriesRow seriesRow in seriesRows)
 			{
 				await connection.ExecuteAsync($@"
-INSERT INTO {nameof(Series)} ( {nameof(Series.ID)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)} )
-VALUES ( @id, @originCountries, @originLanguage, @originScript, @startTime, @endTime )
+INSERT INTO {nameof(Series)} ( {nameof(Series.ID)}, {nameof(Series.MediaType)}, {nameof(Series.ReleaseType)}, {nameof(Series.OriginCountries)}, {nameof(Series.OriginLanguage)}, {nameof(Series.OriginScript)}, {nameof(Series.StartTime)}, {nameof(Series.EndTime)} )
+VALUES ( @id, @mediaType, @releaseType, @originCountries, @originLanguage, @originScript, @startTime, @endTime )
 ON CONFLICT ({nameof(Series.ID)}) DO UPDATE SET
+{nameof(Series.MediaType)} = excluded.{nameof(Series.MediaType)},
+{nameof(Series.ReleaseType)} = excluded.{nameof(Series.ReleaseType)},
 {nameof(Series.OriginCountries)} = excluded.{nameof(Series.OriginCountries)},
 {nameof(Series.OriginLanguage)} = excluded.{nameof(Series.OriginLanguage)},
 {nameof(Series.OriginScript)} = excluded.{nameof(Series.OriginScript)},
@@ -122,6 +126,8 @@ ON CONFLICT ({nameof(Series.ID)}) DO UPDATE SET
 				new
 				{
 					id = seriesRow.ID,
+					mediaType = seriesRow.MediaType,
+					releaseType = seriesRow.ReleaseType,
 					originCountries = seriesRow.OriginCountries,
 					originLanguage = seriesRow.OriginLanguage,
 					originScript = seriesRow.OriginScript,
