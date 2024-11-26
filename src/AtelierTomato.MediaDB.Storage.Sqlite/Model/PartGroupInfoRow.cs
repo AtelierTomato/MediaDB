@@ -5,11 +5,12 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 	public class PartGroupInfoRow
 	{
 		public ulong SeriesID { get; set; }
-		public string ParentPartID { get; set; }
+		public string ParentPartID { get; set; } = string.Empty;
 		public string? AverageLengthTime { get; set; }
 		public int? AverageLengthPages { get; set; }
-		public string MediaType { get; set; }
-		public string ReleaseType { get; set; }
+		public string MediaType { get; set; } = string.Empty;
+		public string ReleaseType { get; set; } = string.Empty;
+		public PartGroupInfoRow() { }
 		public PartGroupInfoRow(ulong seriesID, string parentPartID, string? averageLengthTime, int? averageLengthPages, string mediaType, string releaseType)
 		{
 			SeriesID = seriesID;
@@ -38,7 +39,7 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 			TimeSpan? averageLengthTime = null;
 			if (AverageLengthTime is not null)
 			{
-				TimeSpan.TryParseExact(AverageLengthTime, "c", null, out var result);
+				TimeSpan.TryParse(AverageLengthTime, out var result);
 				averageLengthTime = result;
 			}
 			if (!Enum.TryParse<MediaType>(MediaType, out var mediaType))

@@ -14,6 +14,17 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite
 			this.options = options.Value;
 		}
 
+		public async Task<int> CountPartGroupInfo()
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.ExecuteScalarAsync<int>($@"SELECT COUNT(*) FROM {nameof(PartGroupInfo)}");
+
+			connection.Close();
+			return result;
+		}
+
 		public async Task DeletePartGroupInfo(ulong seriesID, PartID? parentPartID)
 		{
 			await using var connection = new SqliteConnection(options.ConnectionString);
@@ -116,12 +127,12 @@ WHERE {nameof(PartGroupInfo.SeriesID)} IS @seriesID
 			{
 				await connection.ExecuteAsync($@"
 INSERT INTO {nameof(PartGroupInfo)} ( {nameof(PartGroupInfo.SeriesID)}, {nameof(PartGroupInfo.ParentPartID)}, {nameof(PartGroupInfo.AverageLengthTime)}, {nameof(PartGroupInfo.AverageLengthPages)}, {nameof(PartGroupInfo.MediaType)}, {nameof(PartGroupInfo.ReleaseType)} )
-VALUIES ( @seriesID, @parentPartID, @averageLengthTime, @averageLengthPages, @mediaType, @releaseType )
+VALUES ( @seriesID, @parentPartID, @averageLengthTime, @averageLengthPages, @mediaType, @releaseType )
 ON CONFLICT ({nameof(PartGroupInfo.SeriesID)}, {nameof(PartGroupInfo.ParentPartID)}) DO UPDATE SET
 {nameof(PartGroupInfo.AverageLengthTime)} = excluded.{nameof(PartGroupInfo.AverageLengthTime)},
 {nameof(PartGroupInfo.AverageLengthPages)} = excluded.{nameof(PartGroupInfo.AverageLengthPages)},
 {nameof(PartGroupInfo.MediaType)} = excluded.{nameof(PartGroupInfo.MediaType)},
-{nameof(PartGroupInfo.ReleaseType)} = excluded.{nameof(PartGroupInfo.ReleaseType)},
+{nameof(PartGroupInfo.ReleaseType)} = excluded.{nameof(PartGroupInfo.ReleaseType)}
 ",
 				new
 				{

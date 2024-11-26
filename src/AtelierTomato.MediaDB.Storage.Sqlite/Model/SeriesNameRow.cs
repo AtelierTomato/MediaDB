@@ -6,9 +6,10 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 	public class SeriesNameRow
 	{
 		public ulong ID { get; set; }
-		public string Language { get; set; }
-		public string Script { get; set; }
-		public string Name { get; set; }
+		public string Language { get; set; } = string.Empty;
+		public string Script { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
+		public SeriesNameRow() { }
 		public SeriesNameRow(ulong ID, string language, string script, string name)
 		{
 			this.ID = ID;

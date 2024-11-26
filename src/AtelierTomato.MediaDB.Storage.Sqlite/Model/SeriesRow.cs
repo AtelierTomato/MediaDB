@@ -6,14 +6,19 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 	public class SeriesRow
 	{
 		public ulong ID { get; set; }
-		public string OriginCountries { get; set; }
+		public string MediaType { get; set; } = "Unknown";
+		public string ReleaseType { get; set; } = "Unknown";
+		public string OriginCountries { get; set; } = string.Empty;
 		public string? OriginLanguage { get; set; }
 		public string? OriginScript { get; set; }
 		public string? StartTime { get; set; }
 		public string? EndTime { get; set; }
-		public SeriesRow(ulong ID, string originCountries, string? originLanguage, string? originScript, string? startTime, string? endTime)
+		public SeriesRow() { }
+		public SeriesRow(ulong ID, string mediaType, string releaseType, string originCountries, string? originLanguage, string? originScript, string? startTime, string? endTime)
 		{
 			this.ID = ID;
+			MediaType = mediaType;
+			ReleaseType = releaseType;
 			OriginCountries = originCountries;
 			OriginLanguage = originLanguage;
 			OriginScript = originScript;
@@ -23,6 +28,8 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 		public SeriesRow(Series series)
 		{
 			ID = series.ID;
+			MediaType = series.MediaType.ToString();
+			ReleaseType = series.ReleaseType.ToString();
 			OriginCountries = string.Join(' ', series.OriginCountries.Select(c => c.Name));
 			OriginLanguage = series.OriginLanguage?.Name;
 			OriginScript = series.OriginScript?.ToString();
@@ -31,6 +38,14 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 		}
 		public Series ToSeries()
 		{
+			if (!Enum.TryParse<MediaType>(MediaType, out var mediaType))
+			{
+				throw new InvalidOperationException($"{MediaType} is not a valid type of {nameof(MediaType)}.");
+			}
+			if (!Enum.TryParse<ReleaseType>(ReleaseType, out var releaseType))
+			{
+				throw new InvalidOperationException($"{ReleaseType} is not a valid type of {nameof(MediaType)}.");
+			}
 			IReadOnlyList<RegionInfo> originCountries = OriginCountries.Split(' ').Select(c => new RegionInfo(c)).ToList();
 			CultureInfo? originLanguage = null;
 			if (OriginLanguage is not null)
@@ -49,15 +64,15 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite.Model
 			DateTimeOffset? startTime = null, endTime = null;
 			if (StartTime is not null)
 			{
-				DateTimeOffset.TryParseExact(StartTime, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result);
+				DateTimeOffset.TryParse(StartTime, out var result);
 				startTime = result;
 			}
 			if (EndTime is not null)
 			{
-				DateTimeOffset.TryParseExact(EndTime, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result);
+				DateTimeOffset.TryParse(EndTime, out var result);
 				endTime = result;
 			}
-			return new Series(ID, originCountries, originLanguage, originScript, startTime, endTime);
+			return new Series(ID, mediaType, releaseType, originCountries, originLanguage, originScript, startTime, endTime);
 		}
 	}
 }

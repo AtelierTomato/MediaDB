@@ -15,6 +15,17 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite
 			this.options = options.Value;
 		}
 
+		public async Task<int> CountPartNames()
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.ExecuteScalarAsync<int>($@"SELECT COUNT(*) FROM {nameof(PartName)}");
+
+			connection.Close();
+			return result;
+		}
+
 		public async Task DeletePartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script)
 		{
 			await using var connection = new SqliteConnection(options.ConnectionString);
@@ -80,7 +91,7 @@ WHERE {nameof(PartName.SeriesID)} IS @seriesID
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)}
 			");
 
@@ -94,7 +105,7 @@ FROM {nameof(PartName)}
 			connection.Open();
 
 			var result = await connection.QuerySingleOrDefaultAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.PartID)} IS @partID AND
@@ -119,7 +130,7 @@ FROM {nameof(PartName)} WHERE
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.PartID)} IS @partID
@@ -140,7 +151,7 @@ FROM {nameof(PartName)} WHERE
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)}
 WHERE {nameof(PartName.SeriesID)} IS @seriesID
 ",
@@ -159,7 +170,7 @@ WHERE {nameof(PartName.SeriesID)} IS @seriesID
 			connection.Open();
 
 			var result = await connection.QueryAsync<PartNameRow>($@"
-SLEECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
+SELECT {nameof(PartName.SeriesID)}, {nameof(PartName.PartID)}, {nameof(PartName.Language)}, {nameof(PartName.Script)}, {nameof(PartName.Name)}
 FROM {nameof(PartName)} WHERE
 {nameof(PartName.SeriesID)} IS @seriesID AND
 {nameof(PartName.Language)} Is @language AND

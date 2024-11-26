@@ -4,6 +4,7 @@
 	{
 		Unknown,
 		Other,
+		Multiple,
 		Serialized,
 		Stage,
 		Cinema,

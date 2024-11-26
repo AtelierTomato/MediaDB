@@ -11,6 +11,7 @@
 		public int? AverageLengthPages { get; set; }
 		public MediaType MediaType { get; set; }
 		public ReleaseType ReleaseType { get; set; }
+		public PartGroupInfo() { }
 		public PartGroupInfo(ulong seriesID, PartID? parentPartID, TimeSpan? averageLengthTime, int? averageLengthPages, MediaType mediaType, ReleaseType releaseType)
 		{
 			SeriesID = seriesID;
