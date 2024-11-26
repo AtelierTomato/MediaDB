@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace AtelierTomato.MediaDB.API.Converters
+namespace AtelierTomato.MediaDB.Model.Converters
 {
 	public class CultureInfoConverter : JsonConverter<CultureInfo>
 	{
