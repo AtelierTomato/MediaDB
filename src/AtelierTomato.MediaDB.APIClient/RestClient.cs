@@ -70,5 +70,19 @@ namespace AtelierTomato.MediaDB.APIClient
 			var content = await response.Content.ReadAsStringAsync();
 			return JsonSerializer.Deserialize<T>(content, _jsonOptions) ?? default!;
 		}
+
+		public async Task<bool> CheckHealthAsync()
+		{
+			try
+			{
+				var response = await _httpClient.GetAsync("health");
+
+				return response.IsSuccessStatusCode;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 	}
 }
