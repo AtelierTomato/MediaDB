@@ -14,6 +14,17 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite
 			this.options = options.Value;
 		}
 
+		public async Task<int> CountParts()
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.ExecuteScalarAsync<int>($@"SELECT COUNT(*) FROM {nameof(Part)}");
+
+			connection.Close();
+			return result;
+		}
+
 		public async Task DeletePart(ulong seriesID, PartID partID) => await DeletePartRangeInSeries(seriesID, [partID]);
 		public async Task DeletePartRangeInSeries(ulong seriesID, IEnumerable<PartID> partIDRange)
 		{
@@ -83,6 +94,27 @@ WHERE {nameof(Part.SeriesID)} IN @seriesIDRange
 			new
 			{
 				seriesIDRange,
+			});
+
+			connection.Close();
+			return result.Select(r => r.ToPart());
+		}
+
+		public async Task<IEnumerable<Part>> SearchPartByName(string name)
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.QueryAsync<PartRow>($@"
+SELECT DISTINCT {nameof(Part)}.{nameof(Part.SeriesID)}, {nameof(Part)}.{nameof(Part.PartID)}, {nameof(Part)}.{nameof(Part.LengthTime)}, {nameof(Part)}.{nameof(Part.LengthPages)}, {nameof(Part)}.{nameof(Part.StartTime)}, {nameof(Part)}.{nameof(Part.EndTime)}
+FROM {nameof(Part)} INNER JOIN {nameof(PartName)} ON
+{nameof(Part)}.{nameof(Part.SeriesID)} IS {nameof(PartName)}.{nameof(PartName.SeriesID)} AND
+{nameof(Part)}.{nameof(Part.PartID)} IS {nameof(PartName)}.{nameof(PartName.PartID)}
+WHERE {nameof(PartName)}.{nameof(PartName.Name)} LIKE '%' || @name || '%'
+",
+			new
+			{
+				name
 			});
 
 			connection.Close();

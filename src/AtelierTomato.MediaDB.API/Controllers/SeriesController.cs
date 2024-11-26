@@ -87,12 +87,29 @@ namespace AtelierTomato.MediaDB.API.Controllers
 			return Ok(result);
 		}
 
+		[HttpGet("search/name/{name}")]
+		public async Task<ActionResult<IEnumerable<Series>>> SearchSeriesByName(string name)
+		{
+			var result = await _seriesAccess.SearchSeriesByName(name);
+
+			if (result is null || !result.Any())
+				return NotFound();
+
+			return Ok(result);
+		}
+
 		[HttpDelete("{ID}")]
 		public async Task<IActionResult> DeleteSeries(ulong ID)
 		{
 			await _seriesAccess.DeleteSeries(ID);
 			return NoContent();
 		}
+
+		[HttpGet("count")]
+		public async Task<ActionResult<int>> CountSeries()
+		{
+			var result = await _seriesAccess.CountSeries();
+			return Ok(result);
+		}
 	}
 }
-

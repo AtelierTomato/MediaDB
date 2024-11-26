@@ -4,6 +4,7 @@
 	{
 		Unknown,
 		Other,
+		Multimedia,
 		Animation,
 		LiveAction,
 		Literature,

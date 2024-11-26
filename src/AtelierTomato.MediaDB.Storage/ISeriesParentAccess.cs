@@ -13,5 +13,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task DeleteSeriesParent(ulong ID, ulong parentID);
 		Task DeleteSeriesParentRangeBySeries(ulong ID);
 		Task DeleteSeriesParentRangeByParentSeries(ulong parentID);
+		Task<int> CountSeriesParents();
 	}
 }

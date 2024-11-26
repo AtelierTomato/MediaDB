@@ -14,5 +14,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task<IEnumerable<SeriesName>> ReadAllSeriesNames();
 		Task DeleteSeriesName(ulong ID, CultureInfo language, ScriptType script);
 		Task DeleteSeriesNameRangeForSeries(ulong ID);
+		Task<int> CountSeriesNames();
 	}
 }
