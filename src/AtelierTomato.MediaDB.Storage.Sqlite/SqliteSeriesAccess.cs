@@ -77,6 +77,26 @@ WHERE {nameof(Series.ID)} IN @ids
 			return result.Select(r => r.ToSeries());
 		}
 
+		public async Task<IEnumerable<Series>> SearchSeriesByName(string name)
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.QueryAsync<SeriesRow>($@"
+SELECT DISTINCT {nameof(Series)}.{nameof(Series.ID)}, {nameof(Series)}.{nameof(Series.MediaType)}, {nameof(Series)}.{nameof(Series.ReleaseType)}, {nameof(Series)}.{nameof(Series.OriginCountries)}, {nameof(Series)}.{nameof(Series.OriginLanguage)}, {nameof(Series)}.{nameof(Series.OriginScript)}, {nameof(Series)}.{nameof(Series.StartTime)}, {nameof(Series)}.{nameof(Series.EndTime)}
+FROM {nameof(Series)} INNER JOIN {nameof(SeriesName)}
+ON {nameof(Series)}.{nameof(Series.ID)} IS {nameof(SeriesName)}.{nameof(SeriesName.ID)}
+WHERE {nameof(SeriesName)}.{nameof(SeriesName.Name)} LIKE '%' || @name || '%'
+",
+			new
+			{
+				name
+			});
+
+			connection.Close();
+			return result.Select(r => r.ToSeries());
+		}
+
 		public async Task<ulong> WriteNewSeries(Series series) => (await WriteNewSeriesRange([series])).FirstOrDefault();
 		public async Task<IEnumerable<ulong>> WriteNewSeriesRange(IEnumerable<Series> seriesRange)
 		{

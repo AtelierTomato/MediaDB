@@ -13,5 +13,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task DeletePart(ulong seriesID, PartID partID);
 		Task DeletePartRangeInSeries(ulong seriesID, IEnumerable<PartID> partIDRange);
 		Task<int> CountParts();
+		Task<IEnumerable<Part>> SearchPartByName(string name);
 	}
 }

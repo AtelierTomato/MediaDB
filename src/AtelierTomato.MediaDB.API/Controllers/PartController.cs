@@ -74,6 +74,17 @@ namespace AtelierTomato.MediaDB.API.Controllers
 			return Ok(result);
 		}
 
+		[HttpGet("search/name/{name}")]
+		public async Task<ActionResult<IEnumerable<Part>>> SearchPartByName(string name)
+		{
+			var result = await _partAccess.SearchPartByName(name);
+
+			if (result is null || !result.Any())
+				return NotFound();
+
+			return Ok(result);
+		}
+
 		[HttpDelete("{seriesID}/{partID}")]
 		public async Task<IActionResult> DeletePart(ulong seriesID, PartID partID)
 		{
