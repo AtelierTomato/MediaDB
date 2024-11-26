@@ -54,10 +54,10 @@ namespace AtelierTomato.MediaDB.API.Controllers
 			return Ok(result);
 		}
 
-		[HttpGet("byseriesrange")]
-		public async Task<ActionResult<IEnumerable<Part>>> ReadPartRangeBySeriesRange([FromQuery] IEnumerable<ulong> seriesIDRange)
+		[HttpGet("range")]
+		public async Task<ActionResult<IEnumerable<Part>>> ReadPartRangeBySeriesRange([FromQuery] IEnumerable<ulong> seriesIDs)
 		{
-			var result = await _partAccess.ReadPartRangeBySeriesRange(seriesIDRange);
+			var result = await _partAccess.ReadPartRangeBySeriesRange(seriesIDs);
 			if (result is null || !result.Any())
 				return NotFound();
 
@@ -93,9 +93,9 @@ namespace AtelierTomato.MediaDB.API.Controllers
 		}
 
 		[HttpDelete("{seriesID}")]
-		public async Task<IActionResult> DeletePartRangeInSeries(ulong seriesID, [FromBody] IEnumerable<PartID> partIDRange)
+		public async Task<IActionResult> DeletePartRangeInSeries(ulong seriesID, [FromQuery] IEnumerable<PartID> partIDs)
 		{
-			await _partAccess.DeletePartRangeInSeries(seriesID, partIDRange);
+			await _partAccess.DeletePartRangeInSeries(seriesID, partIDs);
 			return NoContent();
 		}
 
