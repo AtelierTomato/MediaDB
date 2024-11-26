@@ -86,9 +86,9 @@ namespace AtelierTomato.MediaDB.API.Controllers
 		}
 
 		[HttpDelete("{seriesID}/{partID}/{language}/{script}")]
-		public async Task<IActionResult> DeletePartName(ulong SeriesID, PartID partID, CultureInfo language, ScriptType script)
+		public async Task<IActionResult> DeletePartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script)
 		{
-			await _partNameAccess.DeletePartName(SeriesID, partID, language, script);
+			await _partNameAccess.DeletePartName(seriesID, partID, language, script);
 			return NoContent();
 		}
 
