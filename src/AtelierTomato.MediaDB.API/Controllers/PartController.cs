@@ -87,5 +87,12 @@ namespace AtelierTomato.MediaDB.API.Controllers
 			await _partAccess.DeletePartRangeInSeries(seriesID, partIDRange);
 			return NoContent();
 		}
+
+		[HttpGet("count")]
+		public async Task<ActionResult<int>> CountParts()
+		{
+			var result = await _partAccess.CountParts();
+			return Ok(result);
+		}
 	}
 }

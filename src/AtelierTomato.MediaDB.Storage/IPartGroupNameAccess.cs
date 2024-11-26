@@ -15,5 +15,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task DeletePartGroupName(ulong seriesID, PartID? parentPartID, CultureInfo language, ScriptType script);
 		Task DeletePartGroupNameRangeForPart(ulong seriesID, PartID? parentPartID);
 		Task DeletePartGroupNameRangeForSeries(ulong seriesID);
+		Task<int> CountPartGroupNames();
 	}
 }

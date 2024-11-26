@@ -15,6 +15,17 @@ namespace AtelierTomato.MediaDB.Storage.Sqlite
 			this.options = options.Value;
 		}
 
+		public async Task<int> CountPartNames()
+		{
+			await using var connection = new SqliteConnection(options.ConnectionString);
+			connection.Open();
+
+			var result = await connection.ExecuteScalarAsync<int>($@"SELECT COUNT(*) FROM {nameof(PartName)}");
+
+			connection.Close();
+			return result;
+		}
+
 		public async Task DeletePartName(ulong seriesID, PartID partID, CultureInfo language, ScriptType script)
 		{
 			await using var connection = new SqliteConnection(options.ConnectionString);

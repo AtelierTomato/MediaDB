@@ -11,5 +11,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task<IEnumerable<PartGroupInfo>> ReadAllPartGroupInfos();
 		Task DeletePartGroupInfo(ulong seriesID, PartID? parentPartID);
 		Task DeletePartGroupInfoRangeForSeries(ulong seriesID);
+		Task<int> CountPartGroupInfo();
 	}
 }

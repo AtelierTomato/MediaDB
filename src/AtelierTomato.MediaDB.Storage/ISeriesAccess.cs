@@ -12,5 +12,6 @@ namespace AtelierTomato.MediaDB.Storage
 		Task<IEnumerable<Series>> ReadSeriesRange(IEnumerable<ulong> IDs);
 		Task<IEnumerable<Series>> ReadAllSeries();
 		Task DeleteSeries(ulong ID);
+		Task<int> CountSeries();
 	}
 }
