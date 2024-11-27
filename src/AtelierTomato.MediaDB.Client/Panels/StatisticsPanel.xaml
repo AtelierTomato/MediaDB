@@ -6,8 +6,57 @@
              xmlns:local="clr-namespace:AtelierTomato.MediaDB.Client.Panels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-			 d:DataContext="{d:DesignInstance local:StatisticsPanelViewModel}">
+			 d:DataContext="{d:DesignInstance local:StatisticsPanelViewModel}"
+			 xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors">
+	<Behaviors:Interaction.Triggers>
+		<Behaviors:EventTrigger EventName="Loaded" SourceObject="{Binding ElementName=StatisticsPage}">
+			<Behaviors:InvokeCommandAction Command="{Binding GetStatisticsCommand}"/>
+		</Behaviors:EventTrigger>
+	</Behaviors:Interaction.Triggers>
 	<Grid>
-		<TextBlock Text="Looking good!"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<GroupBox Header="MediaDB Statistics" Grid.Row="1" Grid.Column="1">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="25"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Series" Grid.Row="0" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.Series}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Text="Series Names" Grid.Row="1" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.SeriesNames}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Text="Series-Parent Pairs" Grid.Row="2" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.SeriesParentPairs}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Grid.Row="3"/>
+				<TextBlock Text="Parts" Grid.Row="4" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.Parts}" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Text="Part Names" Grid.Row="5" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.PartNames}" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Text="Part Group Infos" Grid.Row="6" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.PartGroupInfos}" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+				<TextBlock Text="Part Group Names" Grid.Row="7" Grid.Column="0"/>
+				<TextBlock Text="{Binding MediaDBStats.PartGroupNames}" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right" TextAlignment="Right"/>
+			</Grid>
+		</GroupBox>
 	</Grid>
 </UserControl>
