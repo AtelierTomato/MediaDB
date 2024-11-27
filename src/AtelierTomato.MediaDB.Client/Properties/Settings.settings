@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AtelierTomato.MediaDB.Client.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="apiBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://localhost:7072</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

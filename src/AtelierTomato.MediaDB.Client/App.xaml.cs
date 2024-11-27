@@ -1,4 +1,6 @@
-﻿using System.Composition.Hosting;
+﻿using AtelierTomato.MediaDB.APIClient;
+using AtelierTomato.MediaDB.Client.Properties;
+using System.Composition.Hosting;
 using System.Windows;
 
 namespace AtelierTomato.MediaDB.Client;
@@ -12,8 +14,12 @@ public partial class App : Application
 	{
 		base.OnStartup(e);
 
+
+		var client = new RestClient(Settings.Default.apiBaseUrl);
+
 		var configuration = new ContainerConfiguration()
-			.WithAssembly(typeof(App).Assembly);
+			.WithAssembly(typeof(App).Assembly)
+			.WithExport(client);
 
 		var container = configuration.CreateContainer();
 		if (container.TryGetExport<MainWindow>(out var mainWindow))
